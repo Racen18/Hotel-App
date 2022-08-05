@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import Topbar from "./components/Topbar";
+import { Grid, GridItem } from '@chakra-ui/react'
+import Sidebar from "./components/Sidebar";
+import Form from "./components/Form";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Topbar />
+      <Grid
+      templateColumns={'repeat(5, 1fr)'}
+      >
+        <GridItem  colSpan={1} bg='#373737' display={{base:"none",lg:"block"}}>
+          <Sidebar />
+        </GridItem>
+        <GridItem colSpan={{base:5,lg:4}} bg='white'>
+          <Form />
+        </GridItem>
+      </Grid>
     </div>
   );
 }
