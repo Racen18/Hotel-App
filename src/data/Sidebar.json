@@ -1,104 +1,85 @@
 [
   {
     "name": "Dashboard",
-    "value": "Dashboard",
     "userType": "customer",
     "subData": []
   },
   {
     "name": "Notifications",
-    "value": "Notifications",
     "userType": "customer",
     "subData": []
   },
   {
     "name": "Customers",
-    "value": "Customers",
     "userType": "admin",
     "subData": [
       {
         "name": "Postpay",
-        "value": "Postpay",
         "subData": [
           {
-            "name": "next 7 days",
-            "value": "7"
+            "name": "next 7 days"
           },
           {
-            "name": "next 15 days",
-            "value": "15"
+            "name": "next 15 days"
           },
           {
-            "name": "next 30 days",
-            "value": "30"
+            "name": "next 30 days"
           },
           {
-            "name": "next 45 days",
-            "value": "45"
+            "name": "next 45 days"
           },
           {
-            "name": "next 60 days",
-            "value": "60"
+            "name": "next 60 days"
           }
         ]
       },
       {
         "name": "Prepaid",
-        "value": "Prepaid",
         "subData": []
       }
     ]
   },
   {
     "name": "Employee master",
-    "value": "Employee master",
     "userType": "admin",
     "subData": []
   },
   {
     "name": "Users and access",
-    "value": "Users and access",
     "userType": "admin",
     "subData": []
   },
   {
     "name": "Master rate card",
-    "value": "Master rate card",
     "userType": "admin",
     "subData": []
   },
   {
     "name": "Stock points",
-    "value": "Stock points",
     "userType": "admin",
     "subData": []
   },
   {
     "name": "Vehicle master",
-    "value": "Vehicle master",
     "userType": "admin",
     "subData": []
   },
   {
     "name": "Payment tally",
-    "value": "Payment tally",
     "userType": "admin",
     "subData": []
   },
   {
     "name": "Payment history",
-    "value": "Payment history",
     "userType": "admin",
     "subData": []
   },
   {
     "name": "Settings",
-    "value": "Settings",
     "userType": "admin",
     "subData": [
       {
         "name": "Log history",
-        "value": "Log history",
         "subData": []
       }
     ]

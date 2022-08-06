@@ -40,7 +40,6 @@ function Topbar() {
           </Text>
         </Flex>
       </Center>
-
       <Drawer
         isOpen={isOpen}
         placement="right"
