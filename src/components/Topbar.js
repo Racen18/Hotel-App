@@ -50,7 +50,7 @@ function Topbar() {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerBody>
+            <DrawerBody p="0">
               <Sidebar />
             </DrawerBody>
           </DrawerContent>
