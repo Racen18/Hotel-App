@@ -10,11 +10,12 @@ import {
   Button,
   InputLeftAddon,
   InputGroup,
+  Box,
 } from "@chakra-ui/react";
 
 function Form() {
   return (
-    <div>
+    <Box>
       <Container maxW="4xl">
         <Center>
           <Text fontSize="2xl" paddingY="10px">
@@ -30,7 +31,7 @@ function Form() {
         >
           <GridItem>
             <InputGroup>
-              <InputLeftAddon  children="Item name" bg="white" />
+              <InputLeftAddon children="Item name" bg="white" />
               <Input borderLeft="1px solid #D1D1D1" />
             </InputGroup>
           </GridItem>
@@ -57,7 +58,11 @@ function Form() {
             </InputGroup>
           </GridItem>
         </Grid>
-        <Grid templateColumns={{base:"repeat(2,1fr)", lg:"repeat(4,1fr)"}} gap="3" my="20px">
+        <Grid
+          templateColumns={{ base: "repeat(2,1fr)", lg: "repeat(4,1fr)" }}
+          gap="3"
+          my="20px"
+        >
           <GridItem colSpan={1}>
             <InputGroup>
               <InputLeftAddon children="Units" bg="white" />
@@ -88,7 +93,10 @@ function Form() {
         <Text fontSize="20px" paddingY="10px">
           Price details
         </Text>
-        <Grid templateColumns={{base:"repeat(1,1fr)", lg:"repeat(8,1fr)"}} gap="3">
+        <Grid
+          templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
+          gap="3"
+        >
           <GridItem colSpan={3}>
             <Text fontWeight="bold">Taxes</Text>
             <InputGroup>
@@ -101,7 +109,11 @@ function Form() {
             </InputGroup>
           </GridItem>
         </Grid>
-        <Grid templateColumns={{base:"repeat(4,1fr)", lg:"repeat(8,1fr)"}} gap="3" my="20px">
+        <Grid
+          templateColumns={{ base: "repeat(4,1fr)", lg: "repeat(8,1fr)" }}
+          gap="3"
+          my="20px"
+        >
           <GridItem colSpan={3}>
             <Text fontWeight="bold">Code</Text>
             <InputGroup>
@@ -114,7 +126,11 @@ function Form() {
             <Input borderRadius="8px" placeholder="00%" />
           </GridItem>
         </Grid>
-        <Grid templateColumns={{base:"repeat(4,1fr)", lg:"repeat(8,1fr)"}} gap="3" my="20px">
+        <Grid
+          templateColumns={{ base: "repeat(4,1fr)", lg: "repeat(8,1fr)" }}
+          gap="3"
+          my="20px"
+        >
           <GridItem colSpan={3}>
             <InputGroup>
               <InputLeftAddon children="CGST" bg="white" />
@@ -133,11 +149,7 @@ function Form() {
           <GridItem colSpan={2}>
             <InputGroup>
               <InputLeftAddon children="Variant" bg="white" />
-              <Select
-                borderLeftRadius="0px"
-                placeholder="--"
-                borderLeft="1px solid #D1D1D1"
-              />
+              <Input placeholder="--" borderLeft="1px solid #D1D1D1" />
             </InputGroup>
           </GridItem>
           <GridItem colSpan={1}>
@@ -156,7 +168,7 @@ function Form() {
         <Grid
           templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
           gap="3"
-          my='20px'
+          my="20px"
         >
           <GridItem colSpan={7}></GridItem>
           <GridItem colSpan={1}>
@@ -177,7 +189,7 @@ function Form() {
           </GridItem>
         </Grid>
       </Container>
-    </div>
+    </Box>
   );
 }
 
