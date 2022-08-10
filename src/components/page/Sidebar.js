@@ -1,5 +1,5 @@
 import React from "react";
-import SidebarJSON from "../data/Sidebar.json";
+import SidebarJSON from "../../data/Sidebar.json";
 import {
   Center,
   Box,
@@ -9,12 +9,12 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import CommonButton from "./commons/Button";
-import CommonText from "./commons/Text";
+import CommonButton from "../commons/Button";
+import CommonText from "../commons/Text";
 
 function Sidebar() {
   return (
-    <Box bg="#373737">
+    <Box bg="#373737" h={"100vh"}>
       <Center display="flex" flexDirection="column">
         <CommonButton
           value={"Add customers +"}
@@ -39,20 +39,14 @@ function Sidebar() {
         >
           {SidebarJSON.map((item) => (
             <>
-              <CommonText
-                value={item.name}
-                paddingY="8px"
-                fontSize="16px"
-              />
+              <CommonText value={item.name} paddingY="8px" fontSize="16px" />
               <Accordion allowMultiple>
                 {item.subData !== [] &&
                   item.subData.map((data, index) => (
                     <AccordionItem borderStyle="none">
                       <h2>
                         <AccordionButton key={index}>
-                          <Box flex="1" textAlign="left">
-                            {data.name}
-                          </Box>
+                          <Box>{data.name}</Box>
                           <AccordionIcon />
                         </AccordionButton>
                       </h2>

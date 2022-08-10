@@ -1,7 +1,8 @@
-import Topbar from "./components/Topbar";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import Sidebar from "./components/Sidebar";
-import Form from "./components/Form";
+import Topbar from "./components/page/Topbar";
+import Sidebar from "./components/page/Sidebar";
+// import MasterForm from "./components/page/Form";
+import FormikForm from "./components/page/FormikForm";
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
         >
           <Sidebar />
         </GridItem>
-        <GridItem colSpan={{ base: 5, lg: 4 }} bg="white">
-          <Form />
+        <GridItem colSpan={{ base: 5, lg: 4 }}>
+          {/* <MasterForm /> */}
+          <FormikForm />
         </GridItem>
       </Grid>
     </Box>

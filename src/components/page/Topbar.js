@@ -14,8 +14,8 @@ import {
   Box,
 } from "@chakra-ui/react";
 import React from "react";
-import Logo from "../assests/Images/sneha_logo.png";
-import "../assests/Fonts/Raleway-Bold.ttf";
+import Logo from "../../assests/Images/sneha_logo.png";
+import "../../assests/Fonts/Raleway-Bold.ttf";
 import Sidebar from "./Sidebar";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
@@ -33,7 +33,7 @@ function Topbar() {
         >
           <Icon as={HamburgerIcon} />
         </Button>
-        <Flex h="60px" alignItems="center">
+        <Flex alignItems="center">
           <Image h={[4, 8]} src={Logo} alt="logo" /> &nbsp;&nbsp;
           <Text fontWeight="bold" fontSize={[20, 38]} color="#D61119">
             HOTEL TEAM
