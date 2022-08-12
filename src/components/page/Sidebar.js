@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import SidebarJSON from "../../data/Sidebar.json";
 import {
   Center,
@@ -23,6 +24,7 @@ function Sidebar() {
           color={"white"}
           bg={"#E45159"}
         />
+        <Link to='/newpage'>
         <CommonButton
           value={"Daily Indents"}
           width={"200px"}
@@ -30,6 +32,7 @@ function Sidebar() {
           color={"white"}
           bg={"#18B83B"}
         />
+        </Link>
         <Box
           border="1px solid #E45159"
           borderRadius="8px"

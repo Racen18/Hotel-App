@@ -60,11 +60,15 @@ function FormikValidationForm() {
     handleGST();
   }, [formik.values.basePrice]);
 
+  useEffect(() => {
+    handleGST();
+  }, [formik.values.finalPrice]);
+
   const handleGST = () => {
-    const GST = (formik.values.sgst + formik.values.cgst) / 2;
+    const GST = (parseInt(formik.values.sgst) + parseInt(formik.values.cgst)) / 2;
     if (formik.values.taxType === "Inclusive") {
-      const tax = (formik.values.basePrice * GST) / (100 + GST);
-      formik.values.finalPrice = formik.values.basePrice + tax;
+      const tax = formik.values.finalPrice - formik.values.finalPrice * (100 / (100 + GST));
+      formik.values.basePrice = formik.values.finalPrice - tax;
     } else if (formik.values.taxType === "Exclusive") {
       const tax = (formik.values.basePrice * GST) / 100;
       formik.values.finalPrice = formik.values.basePrice + tax;
@@ -132,12 +136,13 @@ function FormikValidationForm() {
               <Input
                 name="itemName"
                 value={formik.values.itemName}
+                onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 borderLeftRadius={"0"}
                 borderLeft={"1px solid #D1D1D1"}
               />
             </InputGroup>
-            {formik.errors.itemName ? (
+            {formik.touched.itemName && formik.errors.itemName ? (
               <p style={{ color: "red" }}>{formik.errors.itemName}</p>
             ) : null}
           </GridItem>
@@ -163,6 +168,9 @@ function FormikValidationForm() {
                 ))}
               </Select>
             </InputGroup>
+            {formik.touched.category && formik.errors.category ? (
+              <p style={{ color: "red" }}>{formik.errors.category}</p>
+            ) : null}
           </GridItem>
           <GridItem>
             <InputGroup>
@@ -348,6 +356,8 @@ function FormikValidationForm() {
                   <InputLeftAddon children={"Base price"} bg={"white"} />
                   <Input
                     name="basePrice"
+                    color={'red'}
+                    disabled={formik.values.taxType === "Inclusive"}
                     value={formik.values.basePrice}
                     onChange={formik.handleChange}
                     borderLeftRadius={"0"}
@@ -362,7 +372,8 @@ function FormikValidationForm() {
                     <InputLeftAddon children={"Final price"} bg={"white"} />
                     <Input
                       name="finalPrice"
-                      disabled={formik.values.taxType !== "Not applicable"}
+                      color={'red'}
+                      disabled={formik.values.taxType !== "Inclusive"}
                       value={formik.values.finalPrice}
                       onChange={formik.handleChange}
                       borderLeftRadius={"0"}
