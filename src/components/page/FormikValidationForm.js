@@ -58,11 +58,7 @@ function FormikValidationForm() {
 
   useEffect(() => {
     handleGST();
-  }, [formik.values.basePrice]);
-
-  useEffect(() => {
-    handleGST();
-  }, [formik.values.finalPrice]);
+  }, [formik.values.basePrice, formik.values.finalPrice]);
 
   const handleGST = () => {
     const GST = (parseInt(formik.values.sgst) + parseInt(formik.values.cgst)) / 2;
@@ -357,7 +353,7 @@ function FormikValidationForm() {
                   <Input
                     name="basePrice"
                     color={'red'}
-                    disabled={formik.values.taxType === "Inclusive"}
+                    disabled={formik.values.taxType === "Inclusive" || formik.values.taxType === ""}
                     value={formik.values.basePrice}
                     onChange={formik.handleChange}
                     borderLeftRadius={"0"}
