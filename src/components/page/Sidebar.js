@@ -24,14 +24,14 @@ function Sidebar() {
           color={"white"}
           bg={"#E45159"}
         />
-        <Link to='/newpage'>
-        <CommonButton
-          value={"Daily Indents"}
-          width={"200px"}
-          marginBottom={"20px"}
-          color={"white"}
-          bg={"#18B83B"}
-        />
+        <Link to="/newpage">
+          <CommonButton
+            value={"Daily Indents"}
+            width={"200px"}
+            marginBottom={"20px"}
+            color={"white"}
+            bg={"#18B83B"}
+          />
         </Link>
         <Box
           border="1px solid #E45159"

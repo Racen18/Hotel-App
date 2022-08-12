@@ -13,12 +13,13 @@ import {
   InputLeftAddon,
 } from "@chakra-ui/react";
 import Configs from "../../data/GroupJSON";
-import axios from "axios";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 
 function FormikValidationForm() {
   const [value, setValue] = useState([[]]);
+  const dispatch = useDispatch()
 
   const validate = Yup.object({
     itemName: Yup.string().required("Required"),
@@ -52,52 +53,25 @@ function FormikValidationForm() {
     },
     validationSchema: validate,
     onSubmit: (values) => {
-      createData(values);
+      dispatch({type: 'CREATE_DATA', payload: values})
     },
   });
 
   useEffect(() => {
     handleGST();
-  }, [formik.values.basePrice, formik.values.finalPrice]);
+  }, [formik.values.basePrice, formik.values.finalPrice, formik.values.cgst, formik.values.sgst]);
 
   const handleGST = () => {
-    const GST = (parseInt(formik.values.sgst) + parseInt(formik.values.cgst)) / 2;
+    const GST = (parseInt(formik.values.sgst) + parseInt(formik.values.cgst));
     if (formik.values.taxType === "Inclusive") {
       const tax = formik.values.finalPrice - formik.values.finalPrice * (100 / (100 + GST));
       formik.values.basePrice = formik.values.finalPrice - tax;
     } else if (formik.values.taxType === "Exclusive") {
       const tax = (formik.values.basePrice * GST) / 100;
-      formik.values.finalPrice = formik.values.basePrice + tax;
+      formik.values.finalPrice = parseInt(formik.values.basePrice) + parseInt(tax);
     } else {
       formik.values.finalPrice = formik.values.basePrice;
     }
-  };
-
-  const createData = async (values) => {
-    const url =
-      "https://crudcrud.com/api/0db8e7d64d4b44269105e3243a7f706e/product";
-    await axios
-      .post(url, {
-        itemName: values.itemName,
-        category: values.category,
-        subCategory: values.subCategory,
-        unit: values.unit,
-        netWeight: values.netWeight,
-        maxOrderQuantity: values.maxOrderQuantity,
-        taxType: values.taxType,
-        sgst: values.sgst,
-        cgst: values.cgst,
-        variantName: values.variantName,
-        basePrice: values.basePrice,
-        finalPrice: values.finalPrice,
-      })
-      .then((res) => {
-        console.log("res", res);
-        alert("The data has been submitted");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const handleVariant = () => {
