@@ -4,7 +4,8 @@ import React from "react";
 function CommonButton(props) {
   return (
     <Button
-      onClick={(e) => props.onClick(e)}
+      type={props.type}
+      onClick={props.onClick}
       w={props.width}
       marginY={props.marginY}
       color={props.color}

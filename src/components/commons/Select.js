@@ -4,8 +4,9 @@ import React from "react";
 function CommonSelect(props) {
   return (
     <Select
+      name={props.name}
       disabled={props.disabled}
-      onChange={(e) => props.handleSelectedValue(e.target.value)}
+      onChange={props.onChange}
       placeholder={props.placeholder}
       borderRadius={props.borderRadius}
       borderLeft={props.borderLeft}

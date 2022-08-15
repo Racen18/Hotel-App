@@ -7,9 +7,10 @@ function CommonGroupInput(props) {
     <InputGroup>
       <InputLeftAddon children={props.children} bg={props.bg} />
       <CommonInput
+        name={props.name}
         value={props.value}
         color={props.color}
-        handleSelectedValue={props.handleSelectedValue}
+        onChange={props.onChange}
         disabled={props.disabled}
         placeholder={props.placeholder}
         borderLeftRadius={props.borderLeftRadius}
