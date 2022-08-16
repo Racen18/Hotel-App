@@ -18,7 +18,7 @@ const units = [{ name: "Kgs" }, { name: "Ltrs" }, { name: "Wght" }];
 const taxTypes = [
   { name: "Inclusive" },
   { name: "Exclusive" },
-  { name: "Not applicable" },
+  { name: "Exempted" },
 ];
 
 const gstPercentage = [{ name: 5 }, { name: 12 }, { name: 18 }, { name: 28 }];

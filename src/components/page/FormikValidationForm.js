@@ -12,7 +12,7 @@ import CommonButton from "../commons/Button";
 function FormikValidationForm() {
   const [value, setValue] = useState([[]]);
   const state = useSelector((state) =>
-    state.formReducer.then((res) => console.log('res', res))
+    state.formReducer.then((res) => console.log("res", res))
   );
   const dispatch = useDispatch();
 
@@ -77,7 +77,7 @@ function FormikValidationForm() {
     }
   };
 
-  const handleVariant = () => {
+  const handleVariant = (i) => {
     const multipleVariants = [...value, []];
     setValue(multipleVariants);
   };

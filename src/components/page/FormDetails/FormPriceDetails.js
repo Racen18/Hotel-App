@@ -54,7 +54,7 @@ function FormPriceDetails(props) {
           <CommonText fontWeight={"bold"} value={"Value"} />
           <CommonInput
             readOnly={true}
-            value={props.formik.values.sgst}
+            value={props.formik.values.sgst + "%"}
             disabled={props.formik.values.taxType === "Not applicable"}
             borderLeft={"1px solid #D1D1D1"}
             placeholder={"00%"}
@@ -83,7 +83,7 @@ function FormPriceDetails(props) {
         <GridItem>
           <CommonInput
             readOnly={true}
-            value={props.formik.values.cgst}
+            value={props.formik.values.cgst + "%"}
             disabled={props.formik.values.taxType === "Not applicable"}
             borderLeft={"1px solid #D1D1D1"}
             placeholder={"00%"}
@@ -91,12 +91,12 @@ function FormPriceDetails(props) {
         </GridItem>
       </Grid>
       <CommonText fontWeight={"bold"} value={"Variants (if any)"} />
-      <Grid
-        templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
-        gap={"3"}
-      >
-        {props.value.map((data, i) => (
-          <>
+      {props.value.map((data, i) => (
+        <Box key={i}>
+          <Grid
+            templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
+            gap={"3"}
+          >
             <GridItem colSpan={3}>
               <CommonGroupInput
                 children={"Variant"}
@@ -141,33 +141,37 @@ function FormPriceDetails(props) {
               />
             </GridItem>
             <GridItem colSpan={1}>
-              <CommonButton
-                value={"X"}
-                onClick={(e) => props.handleDelete(e, i)}
-                color={"#18B83B"}
-                border={"1px solid #18B83B"}
-                bg={"#FCFCFC"}
-              />
+              {props.value.length > 1 && (
+                <CommonButton
+                  value={"X"}
+                  onClick={(e) => props.handleDelete(e, i)}
+                  color={"#18B83B"}
+                  border={"1px solid #18B83B"}
+                  bg={"#FCFCFC"}
+                />
+              )}
             </GridItem>
-          </>
-        ))}
-      </Grid>
-      <Grid
-        templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
-        gap={"3"}
-        my={"20px"}
-      >
-        <GridItem colSpan={7}></GridItem>
-        <GridItem colSpan={1}>
-          <CommonButton
-            value={"Add variant"}
-            onClick={(e) => props.handleVariant(e)}
-            color={"#18B83B"}
-            border={"1px solid #18B83B"}
-            bg={"#FCFCFC"}
-          />
-        </GridItem>
-      </Grid>
+          </Grid>
+          <Grid
+            templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
+            gap={"3"}
+            my={"20px"}
+          >
+            <GridItem colSpan={7}></GridItem>
+            <GridItem colSpan={1}>
+              {props.value.length - 1 === i && props.value.length < 4 && (
+                <CommonButton
+                  value={"Add variant"}
+                  onClick={() => props.handleVariant(i)}
+                  color={"#18B83B"}
+                  border={"1px solid #18B83B"}
+                  bg={"#FCFCFC"}
+                />
+              )}
+            </GridItem>
+          </Grid>
+        </Box>
+      ))}
     </Box>
   );
 }

@@ -15,7 +15,7 @@ import CommonText from "../commons/Text";
 
 function Sidebar() {
   return (
-    <Box bg="#373737">
+    <Box bg="#373737" h={"100%"}>
       <Center display="flex" flexDirection="column">
         <CommonButton
           value={"Add customers +"}
@@ -40,35 +40,37 @@ function Sidebar() {
           w="200px"
           padding="20px"
         >
-          {SidebarJSON.map((item) => (
-            <>
+          {SidebarJSON.map((item, index) => (
+            <Box key={index}>
               <CommonText value={item.name} paddingY="8px" fontSize="16px" />
               <Accordion allowMultiple>
                 {item.subData !== [] &&
-                  item.subData.map((data, index) => (
-                    <AccordionItem borderStyle="none">
-                      <h2>
-                        <AccordionButton key={index}>
-                          <Box>{data.name}</Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      {data.subData !== [] &&
-                        data.subData.map((value, index) => (
-                          <AccordionPanel
-                            key={index}
-                            padding="5px"
-                            borderLeft="0.1px solid #80808040"
-                            color="#C2C2C2"
-                            fontSize="16px"
-                          >
-                            <Center>{value.name}</Center>
-                          </AccordionPanel>
-                        ))}
-                    </AccordionItem>
+                  item.subData.map((data, i) => (
+                    <Box key={i}>
+                      <AccordionItem borderStyle="none">
+                        <h2>
+                          <AccordionButton>
+                            <Box>{data.name}</Box>
+                            <AccordionIcon />
+                          </AccordionButton>
+                        </h2>
+                        {data.subData !== [] &&
+                          data.subData.map((value, index) => (
+                            <AccordionPanel
+                              key={index}
+                              padding="5px"
+                              borderLeft="0.1px solid #80808040"
+                              color="#C2C2C2"
+                              fontSize="16px"
+                            >
+                              <Center>{value.name}</Center>
+                            </AccordionPanel>
+                          ))}
+                      </AccordionItem>
+                    </Box>
                   ))}
               </Accordion>
-            </>
+            </Box>
           ))}
         </Box>
       </Center>
