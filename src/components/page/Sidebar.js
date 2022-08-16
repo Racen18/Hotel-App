@@ -15,7 +15,7 @@ import CommonText from "../commons/Text";
 
 function Sidebar() {
   return (
-    <Box bg="#373737" h={"100%"}>
+    <Box bg="#373737">
       <Center display="flex" flexDirection="column">
         <CommonButton
           value={"Add customers +"}
