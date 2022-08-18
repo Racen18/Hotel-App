@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, GridItem, Box } from "@chakra-ui/react";
-import { FieldArray } from "formik";
 import Configs from "../../../data/GroupJSON";
 import CommonText from "../../commons/Text";
 import CommonInput from "../../commons/Input";
@@ -45,7 +44,7 @@ function FormPriceDetails(props) {
             name={"sgst"}
             placeholder={"Select"}
             value={props.formik.values.sgst}
-            disabled={props.formik.values.taxType === "Not applicable"}
+            disabled={props.formik.values.taxType === "Exempted"}
             onChange={props.formik.handleChange}
             borderLeftRadius={"0"}
             borderLeft={"1px solid #D1D1D1"}
@@ -57,7 +56,7 @@ function FormPriceDetails(props) {
           <CommonInput
             readOnly={true}
             value={props.formik.values.sgst + "%"}
-            disabled={props.formik.values.taxType === "Not applicable"}
+            disabled={props.formik.values.taxType === "Exempted"}
             borderLeft={"1px solid #D1D1D1"}
             placeholder={"00%"}
           />
@@ -75,7 +74,7 @@ function FormPriceDetails(props) {
             name={"cgst"}
             placeholder={"Select"}
             value={props.formik.values.cgst}
-            disabled={props.formik.values.taxType === "Not applicable"}
+            disabled={props.formik.values.taxType === "Exempted"}
             onChange={props.formik.handleChange}
             borderLeftRadius={"0"}
             borderLeft={"1px solid #D1D1D1"}
@@ -86,7 +85,7 @@ function FormPriceDetails(props) {
           <CommonInput
             readOnly={true}
             value={props.formik.values.cgst + "%"}
-            disabled={props.formik.values.taxType === "Not applicable"}
+            disabled={props.formik.values.taxType === "Exempted"}
             borderLeft={"1px solid #D1D1D1"}
             placeholder={"00%"}
           />
