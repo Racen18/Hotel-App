@@ -27,7 +27,7 @@ function Topbar() {
       <Center bg="#E2E2E2">
         <Button
           ref={btnRef}
-          colorScheme="#D61119"
+          colorScheme="text.orange"
           onClick={onOpen}
           display={{ base: "block", lg: "none" }}
         >
@@ -35,7 +35,7 @@ function Topbar() {
         </Button>
         <Flex alignItems="center">
           <Image h={[4, 8]} src={Logo} alt="logo" /> &nbsp;&nbsp;
-          <Text fontWeight="bold" fontSize={[20, 38]} color="#D61119">
+          <Text fontWeight="bold" fontSize={[20, 38]} color="text.orange">
             HOTEL TEAM
           </Text>
         </Flex>
@@ -49,7 +49,7 @@ function Topbar() {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerBody p="0">
+            <DrawerBody p={"0"}>
               <Sidebar />
             </DrawerBody>
           </DrawerContent>

@@ -15,13 +15,13 @@ import CommonText from "../commons/Text";
 
 function Sidebar() {
   return (
-    <Box bg="#373737">
+    <Box bg="#373737" h={"100%"}>
       <Center display="flex" flexDirection="column">
         <CommonButton
           value={"Add customers +"}
           width={"200px"}
           marginY={"25px"}
-          color={"white"}
+          color={"button.white"}
           bg={"#E45159"}
         />
         <Link to="/newpage">
@@ -29,19 +29,19 @@ function Sidebar() {
             value={"Daily Indents"}
             width={"200px"}
             marginBottom={"20px"}
-            color={"white"}
+            color={"button.white"}
             bg={"#18B83B"}
           />
         </Link>
         <Box
           border="1px solid #E45159"
           borderRadius="8px"
-          color="white"
+          color="text.white"
           w="200px"
           padding="20px"
         >
           {SidebarJSON.map((item, index) => (
-            <Box key={index}>
+            <Box key={index} cursor={"pointer"}>
               <CommonText value={item.name} paddingY="8px" fontSize="16px" />
               <Accordion allowMultiple>
                 {item.subData !== [] &&
@@ -60,7 +60,7 @@ function Sidebar() {
                               key={index}
                               padding="5px"
                               borderLeft="0.1px solid #80808040"
-                              color="#C2C2C2"
+                              color="text.gray"
                               fontSize="16px"
                             >
                               <Center>{value.name}</Center>

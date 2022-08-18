@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Center, Container, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Center, Container, Grid, GridItem } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,9 @@ import FormPriceDetails from "./FormDetails/FormPriceDetails";
 import CommonButton from "../commons/Button";
 
 function FormikValidationForm() {
-  const [value, setValue] = useState([[]]);
+  const [arrayElements, setArrayElements] = useState([
+    { variantName: "", basePrice: 0, finalPrice: 0 },
+  ]);
   const state = useSelector((state) =>
     state.formReducer.then((res) => console.log("res", res))
   );
@@ -26,9 +28,7 @@ function FormikValidationForm() {
     taxType: Yup.string().required("Required"),
     sgst: Yup.number(),
     cgst: Yup.number(),
-    variantName: Yup.string().required("Required"),
-    basePrice: Yup.number().required("Required"),
-    finalPrice: Yup.number().required("Required"),
+    items: Yup.array(),
   });
 
   const formik = useFormik({
@@ -42,9 +42,7 @@ function FormikValidationForm() {
       taxType: "",
       sgst: 0,
       cgst: 0,
-      variantName: "",
-      basePrice: 0,
-      finalPrice: 0,
+      items: arrayElements,
     },
     validationSchema: validate,
     onSubmit: (values) => {
@@ -54,42 +52,46 @@ function FormikValidationForm() {
 
   useEffect(() => {
     handleGST();
-  }, [
-    formik.values.basePrice,
-    formik.values.finalPrice,
-    formik.values.cgst,
-    formik.values.sgst,
-  ]);
+  }, [formik.values.items, formik.values.cgst, formik.values.sgst]);
 
   const handleGST = () => {
-    const GST = parseInt(formik.values.sgst) + parseInt(formik.values.cgst);
+    const gst = parseInt(formik.values.sgst) + parseInt(formik.values.cgst);
+    let tax = [];
     if (formik.values.taxType === "Inclusive") {
-      const tax =
-        formik.values.finalPrice -
-        formik.values.finalPrice * (100 / (100 + GST));
-      formik.values.basePrice = formik.values.finalPrice - tax;
+      formik.values.items.forEach((data, index) => {
+        tax[index] = data.finalPrice - data.finalPrice * (100 / (100 + gst));
+        data.basePrice = parseInt(data.finalPrice) - tax[index];
+      });
     } else if (formik.values.taxType === "Exclusive") {
-      const tax = (formik.values.basePrice * GST) / 100;
-      formik.values.finalPrice =
-        parseInt(formik.values.basePrice) + parseInt(tax);
+      formik.values.items.forEach((data, index) => {
+        tax[index] = (parseInt(data.basePrice) * gst) / 100;
+        data.finalPrice = parseInt(data.basePrice) + tax[index];
+      });
     } else {
-      formik.values.finalPrice = formik.values.basePrice;
+      formik.values.items.forEach((data, index) => {
+        data.finalPrice = data.basePrice;
+      });
     }
   };
 
-  const handleVariant = (i) => {
-    const multipleVariants = [...value, []];
-    setValue(multipleVariants);
+  const handleAddVariant = () => {
+    const multipleVariants = [
+      ...formik.values.items,
+      { variantName: "", basePrice: 0, finalPrice: 0 },
+    ];
+    formik.values.items = multipleVariants;
+    setArrayElements(formik.values.items);
   };
 
-  const handleDelete = (i) => {
-    const deleteVariant = [...value];
+  const handleDeleteVariant = (i) => {
+    const deleteVariant = [...formik.values.items];
     deleteVariant.splice(i, 1);
-    setValue(deleteVariant);
+    formik.values.items = deleteVariant;
+    setArrayElements(formik.values.items);
   };
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <Box as={"form"} onSubmit={formik.handleSubmit}>
       <Container maxW={"4xl"}>
         <Center>
           <CommonText
@@ -101,9 +103,8 @@ function FormikValidationForm() {
         <FormItemDetails formik={formik} />
         <FormPriceDetails
           formik={formik}
-          value={value}
-          handleDelete={handleDelete}
-          handleVariant={handleVariant}
+          handleDeleteVariant={handleDeleteVariant}
+          handleAddVariant={handleAddVariant}
         />
         <Grid
           templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
@@ -115,13 +116,13 @@ function FormikValidationForm() {
               type={"submit"}
               value={"Save item"}
               width={"100%"}
-              color={"#FFFFFF"}
+              color={"button.white"}
               bg={"#18B83B"}
             />
           </GridItem>
         </Grid>
       </Container>
-    </form>
+    </Box>
   );
 }
 

@@ -4,6 +4,7 @@ import React from "react";
 function CommonButton(props) {
   return (
     <Button
+      children={props.value}
       type={props.type}
       onClick={props.onClick}
       w={props.width}
@@ -12,9 +13,7 @@ function CommonButton(props) {
       bg={props.bg}
       border={props.border}
       marginBottom={props.marginBottom}
-    >
-      {props.value}
-    </Button>
+    />
   );
 }
 

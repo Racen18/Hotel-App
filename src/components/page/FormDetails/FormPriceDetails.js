@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, GridItem, Box } from "@chakra-ui/react";
+import { FieldArray } from "formik";
 import Configs from "../../../data/GroupJSON";
 import CommonText from "../../commons/Text";
 import CommonInput from "../../commons/Input";
@@ -8,6 +9,7 @@ import CommonGroupInput from "../../commons/GroupInput";
 import CommonGroupSelect from "../../commons/GroupSelect";
 
 function FormPriceDetails(props) {
+  const variant = props.formik.values.items;
   return (
     <Box>
       <CommonText fontSize={"20px"} paddingY={"10px"} value={"Price details"} />
@@ -91,87 +93,88 @@ function FormPriceDetails(props) {
         </GridItem>
       </Grid>
       <CommonText fontWeight={"bold"} value={"Variants (if any)"} />
-      {props.value.map((data, i) => (
-        <Box key={i}>
-          <Grid
-            templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
-            gap={"3"}
-          >
-            <GridItem colSpan={3}>
-              <CommonGroupInput
-                children={"Variant"}
-                bg={"white"}
-                name={"variantName"}
-                value={props.formik.values.variantName}
-                onChange={props.formik.handleChange}
-                borderLeftRadius={"0"}
-                borderLeft={"1px solid #D1D1D1"}
-                placeholder={"--"}
+      {variant.map((data, i) => (
+        <Grid
+          templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
+          gap={"3"}
+          paddingY={"5px"}
+          key={i}
+        >
+          <GridItem colSpan={3}>
+            <CommonGroupInput
+              children={"Variant"}
+              bg={"white"}
+              name={`items.${i}.variantName`}
+              value={variant[i].variantName}
+              onChange={props.formik.handleChange}
+              borderLeftRadius={"0"}
+              borderLeft={"1px solid #D1D1D1"}
+              placeholder={"--"}
+            />
+          </GridItem>
+          <GridItem colSpan={2}>
+            <CommonGroupInput
+              children={"Base price"}
+              bg={"white"}
+              name={`items.${i}.basePrice`}
+              color={"input.red"}
+              disabled={
+                props.formik.values.taxType === "Inclusive" ||
+                props.formik.values.taxType === ""
+              }
+              value={variant[i].basePrice}
+              onChange={props.formik.handleChange}
+              borderLeftRadius={"0"}
+              borderLeft={"1px solid #D1D1D1"}
+              placeholder={"--"}
+            />
+          </GridItem>
+          <GridItem colSpan={2}>
+            <CommonGroupInput
+              children={"Final price"}
+              bg={"white"}
+              name={`items.${i}.finalPrice`}
+              color={"input.red"}
+              disabled={props.formik.values.taxType !== "Inclusive"}
+              value={variant[i].finalPrice}
+              onChange={props.formik.handleChange}
+              borderLeftRadius={"0"}
+              borderLeft={"1px solid #D1D1D1"}
+              placeholder={"--"}
+            />
+          </GridItem>
+          <GridItem colSpan={1}>
+            {variant.length > 1 && (
+              <CommonButton
+                value={"X"}
+                onClick={() => props.handleDeleteVariant(i)}
+                color={"button.green"}
+                border={"1px solid #18B83B"}
+                bg={"#FCFCFC"}
               />
-            </GridItem>
-            <GridItem colSpan={2}>
-              <CommonGroupInput
-                children={"Base price"}
-                bg={"white"}
-                name={"basePrice"}
-                color={"red"}
-                disabled={
-                  props.formik.values.taxType === "Inclusive" ||
-                  props.formik.values.taxType === ""
-                }
-                value={props.formik.values.basePrice}
-                onChange={props.formik.handleChange}
-                borderLeftRadius={"0"}
-                borderLeft={"1px solid #D1D1D1"}
-                placeholder={"--"}
-              />
-            </GridItem>
-            <GridItem colSpan={2}>
-              <CommonGroupInput
-                children={"Final price"}
-                bg={"white"}
-                name={"finalPrice"}
-                color={"red"}
-                disabled={props.formik.values.taxType !== "Inclusive"}
-                value={props.formik.values.finalPrice}
-                onChange={props.formik.handleChange}
-                borderLeftRadius={"0"}
-                borderLeft={"1px solid #D1D1D1"}
-                placeholder={"--"}
-              />
-            </GridItem>
-            <GridItem colSpan={1}>
-              {props.value.length > 1 && (
-                <CommonButton
-                  value={"X"}
-                  onClick={(e) => props.handleDelete(e, i)}
-                  color={"#18B83B"}
-                  border={"1px solid #18B83B"}
-                  bg={"#FCFCFC"}
-                />
-              )}
-            </GridItem>
-          </Grid>
-          <Grid
-            templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
-            gap={"3"}
-            my={"20px"}
-          >
-            <GridItem colSpan={7}></GridItem>
-            <GridItem colSpan={1}>
-              {props.value.length - 1 === i && props.value.length < 4 && (
-                <CommonButton
-                  value={"Add variant"}
-                  onClick={() => props.handleVariant(i)}
-                  color={"#18B83B"}
-                  border={"1px solid #18B83B"}
-                  bg={"#FCFCFC"}
-                />
-              )}
-            </GridItem>
-          </Grid>
-        </Box>
+            )}
+          </GridItem>
+        </Grid>
       ))}
+      <Grid
+        templateColumns={{ base: "repeat(1,1fr)", lg: "repeat(8,1fr)" }}
+        gap={"3"}
+        my={"20px"}
+      >
+        <GridItem colSpan={7}></GridItem>
+        <GridItem colSpan={1}>
+          {variant.length < 4 && (
+            <CommonButton
+              value={"Add variant"}
+              onClick={() => props.handleAddVariant()}
+              color={"button.green"}
+              border={"1px solid #18B83B"}
+              bg={"#FCFCFC"}
+            />
+          )}
+        </GridItem>
+        {console.log("formikData", props.formik.values)}
+      </Grid>
     </Box>
   );
 }
